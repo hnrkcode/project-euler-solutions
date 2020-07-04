@@ -29,9 +29,21 @@ const renderSolutions = (id) => {
     problemAnchor.href = `${url}/problem=${getProblemNumber(i)}`;
     problemAnchor.textContent = formatName(i);
     problemHeader.append(problemAnchor);
+
+    // The solution is only calculated the first time the button is clicked.
+    const calculateSolution = () => {
+      problemPara.textContent = `Solution: ${solutions[i]()}`;
+      showSolutionBtn.removeEventListener("click", calculateSolution);
+    };
+
+    // Only show the solutions after the button is clicked, because the page will
+    // take forever to load if there's many problems.
     const problemPara = document.createElement("p");
-    problemPara.textContent = `Solution: ${solutions[i]()}`;
-    problem.append(problemHeader, problemPara);
+    const showSolutionBtn = document.createElement("button");
+    showSolutionBtn.textContent = "Show solution";
+    showSolutionBtn.addEventListener("click", calculateSolution);
+
+    problem.append(problemHeader, problemPara, showSolutionBtn);
     problems.append(problem);
   }
 };
