@@ -34,6 +34,7 @@ const renderSolutions = (id) => {
     const calculateSolution = () => {
       problemPara.textContent = `Solution: ${solutions[i]()}`;
       showSolutionBtn.removeEventListener("click", calculateSolution);
+      showSolutionBtn.remove();
     };
 
     // Only show the solutions after the button is clicked, because the page will
