@@ -1,4 +1,5 @@
 import solutions from "./solvedProblems.js";
+import { formatResult } from "./utils/timer.js";
 
 // Add space before the first digit in the string.
 const addSpace = (str) => {
@@ -17,7 +18,7 @@ const getProblemNumber = (str) => str.slice(str.search(/\d/));
 // Dynamically imports and calculates the solution to the problem.
 const calculateSolution = (solution, para, btn) => {
   import("./problems/" + solution + ".js").then((data) => {
-    para.textContent = `Solution: ${data[solution]()}`;
+    para.innerHTML = formatResult(data[solution]);
     btn.removeEventListener("click", calculateSolution);
     btn.remove();
   });
