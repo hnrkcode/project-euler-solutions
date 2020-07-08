@@ -10,12 +10,24 @@ export const timeFunc = (func) => {
 // Return result and if the execution time is good, ok, or bad.
 export const formatResult = (func) => {
   const [result, time] = timeFunc(func);
+  const solutionPara = document.createElement("p");
+  solutionPara.textContent = `Solution: ${result}`;
+  const runtimePara = document.createElement("p");
+  runtimePara.textContent = `Runtime: ${time} ms`;
+  const ratingPara = document.createElement("p");
+  ratingPara.classList.add("has-text-weight-bold");
 
   if (time > 500 && time < 5000) {
-    return `Solution: ${result} <b style="color:#C4A000;">(${time} milliseconds) OK</b>`;
+    ratingPara.textContent = "OK";
+    ratingPara.classList.add("has-text-warning");
+    return [solutionPara, runtimePara, ratingPara];
   } else if (time > 5000) {
-    return `Solution: ${result} <b style="color:red;">(${time} milliseconds) BAD</b>`;
+    ratingPara.textContent = "BAD";
+    ratingPara.classList.add("has-text-danger");
+    return [solutionPara, runtimePara, ratingPara];
   } else {
-    return `Solution: ${result} <b style="color:green;">(${time} milliseconds) GOOD</b>`;
+    ratingPara.textContent = "GOOD";
+    ratingPara.classList.add("has-text-success");
+    return [solutionPara, runtimePara, ratingPara];
   }
 };

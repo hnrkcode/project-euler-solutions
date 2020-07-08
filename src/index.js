@@ -16,9 +16,9 @@ const formatName = (str) => capitalize(addSpace(str));
 const getProblemNumber = (str) => str.slice(str.search(/\d/));
 
 // Dynamically imports and calculates the solution to the problem.
-const calculateSolution = (solution, para, btn) => {
+const calculateSolution = (solution, content, btn) => {
   import("./problems/" + solution + ".js").then((data) => {
-    para.innerHTML = formatResult(data[solution]);
+    content.prepend(...formatResult(data[solution]));
     btn.removeEventListener("click", calculateSolution);
     btn.remove();
   });
@@ -28,30 +28,42 @@ const calculateSolution = (solution, para, btn) => {
 const renderSolutions = (id) => {
   const url = "https://projecteuler.net";
   const problems = document.getElementById(id);
-  const header = document.createElement("h1");
-  header.textContent = "Project Euler Solutions";
-  problems.append(header);
+  const container = document.createElement("div");
+  container.className = "container";
+  const columns = document.createElement("div");
+  columns.className = "columns is-multiline";
+  container.append(columns);
 
   for (let i in solutions) {
     const solution = solutions[i];
     const problem = document.createElement("div");
-    const problemHeader = document.createElement("h2");
-    const problemAnchor = document.createElement("a");
-    problemAnchor.href = `${url}/problem=${getProblemNumber(solution)}`;
-    problemAnchor.textContent = formatName(solution);
-    problemHeader.append(problemAnchor);
+    problem.className = "column is-one-quarter";
+    const card = document.createElement("div");
+    card.className = "card";
+    const cardHeader = document.createElement("header");
+    cardHeader.className = "card-header";
+    const cardAnchor = document.createElement("a");
+    cardAnchor.className = "card-header-title";
+    cardAnchor.href = `${url}/problem=${getProblemNumber(solution)}`;
+    cardAnchor.textContent = formatName(solution);
+    cardHeader.append(cardAnchor);
 
     // Only shows the solutions after the button has been clicked.
-    const problemPara = document.createElement("p");
+    const cardContent = document.createElement("div");
+    cardContent.className = "card-content";
     const showSolutionBtn = document.createElement("button");
+    showSolutionBtn.className = "button is-primary";
     showSolutionBtn.textContent = "Show solution";
     showSolutionBtn.addEventListener(
       "click",
-      calculateSolution.bind(null, solution, problemPara, showSolutionBtn)
+      calculateSolution.bind(null, solution, cardContent, showSolutionBtn)
     );
 
-    problem.append(problemHeader, problemPara, showSolutionBtn);
-    problems.append(problem);
+    cardContent.append(showSolutionBtn);
+    card.append(cardHeader, cardContent);
+    problem.append(card);
+    columns.append(problem);
+    problems.append(container);
   }
 };
 
