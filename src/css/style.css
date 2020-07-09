@@ -1,0 +1,32 @@
+html,
+body {
+  height: 100%;
+}
+
+/* Page header & card */
+.hero, .card {
+  background-color: #313131 !important;
+}
+
+.footer {
+  background-color: #414141 !important;
+}
+
+/* Main bacground color */
+.section {
+  background-color: #525252 !important;
+  min-height: 100%;
+}
+
+/* Cards */
+.card {
+  border-radius: 3%;
+}
+
+/* Headers & text */
+h1,
+h2,
+header > a,
+p {
+  color: #fafafa !important;
+}
