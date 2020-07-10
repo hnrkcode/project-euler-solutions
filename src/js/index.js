@@ -15,6 +15,14 @@ const formatName = (str) => capitalize(addSpace(str));
 
 const getProblemNumber = (str) => str.slice(str.search(/\d/));
 
+const createLoader = (el) => {
+  const loader = document.createElement("div");
+  loader.className = "loader";
+  el.prepend(loader);
+
+  return loader;
+};
+
 // Solve the problem with Web Workers to not block the main thread.
 const calculateSolution = (solution, content, btn) => {
   if (window.Worker) {
@@ -25,8 +33,11 @@ const calculateSolution = (solution, content, btn) => {
     btn.removeEventListener("click", calculateSolution);
     btn.remove();
 
+    const loader = createLoader(content);
+
     // Listener waiting for worker ti finish so it can display the result and runtime.
     calculationWorker.addEventListener("message", ({ data }) => {
+      loader.remove();
       content.prepend(...formatResult(data));
     });
   }

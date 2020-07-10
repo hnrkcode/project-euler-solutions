@@ -4,7 +4,8 @@ body {
 }
 
 /* Page header & card */
-.hero, .card {
+.hero,
+.card {
   background-color: #313131 !important;
 }
 
@@ -29,4 +30,10 @@ h2,
 header > a,
 p {
   color: #fafafa !important;
+}
+
+/* Center loader icon */
+.loader {
+  margin: 0 auto;
+  width: 50%;
 }
