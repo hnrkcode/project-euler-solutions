@@ -1,4 +1,4 @@
-export const problem2 = (max = 4000000) => {
+const problem2 = (max = 4000000) => {
   const fib = (n) => {
     if (n === 0) return n;
     if (n === 1) return n;

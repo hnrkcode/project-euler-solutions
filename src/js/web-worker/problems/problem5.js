@@ -1,4 +1,4 @@
-export const problem5 = (arg = 20) => {
+const problem5 = (arg = 20) => {
   let number = 1;
   let count = 0;
 

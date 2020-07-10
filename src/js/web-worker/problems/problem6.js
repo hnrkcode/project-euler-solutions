@@ -1,4 +1,4 @@
-export const problem6 = (arg = 100) => {
+const problem6 = (arg = 100) => {
   // The sum of the squares of the first N natural numbers.
   const value1 = [...Array(arg).keys()]
     .map((n) => Math.pow(n + 1, 2))

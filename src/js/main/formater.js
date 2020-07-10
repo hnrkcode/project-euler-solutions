@@ -1,15 +1,6 @@
-// Return the result of the function and how many milliseconds it took.
-export const timeFunc = (func) => {
-  const start = new Date().getTime();
-  const result = func();
-  const end = new Date().getTime();
-  const time = end - start;
-  return [result, time];
-};
-
 // Return result and if the execution time is good, ok, or bad.
-export const formatResult = (func) => {
-  const [result, time] = timeFunc(func);
+export const formatResult = (solutionData) => {
+  const [result, time] = solutionData;
 
   const solutionPara = document.createElement("p");
   solutionPara.textContent = `Solution: ${result}`;

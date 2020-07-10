@@ -1,5 +1,5 @@
-import solutions from "./solvedProblems.js";
-import { formatResult } from "./utils/timer.js";
+import solutions from "./main/solved-problems.js";
+import { formatResult } from "./main/formater.js";
 
 // Add space before the first digit in the string.
 const addSpace = (str) => {
@@ -15,13 +15,17 @@ const formatName = (str) => capitalize(addSpace(str));
 
 const getProblemNumber = (str) => str.slice(str.search(/\d/));
 
-// Dynamically imports and calculates the solution to the problem.
+// Solve the problem with Web Workers to not block the main thread.
 const calculateSolution = (solution, content, btn) => {
-  import("./problems/" + solution + ".js").then((data) => {
-    content.prepend(...formatResult(data[solution]));
-    btn.removeEventListener("click", calculateSolution);
-    btn.remove();
-  });
+  if (window.Worker) {
+    const calculationWorker = new Worker("./src/js/web-worker/worker.js");
+    calculationWorker.postMessage(solution);
+    calculationWorker.addEventListener("message", ({ data }) => {
+      content.prepend(...formatResult(data));
+      btn.removeEventListener("click", calculateSolution);
+      btn.remove();
+    });
+  }
 };
 
 // Render all solutions to the solved problems.

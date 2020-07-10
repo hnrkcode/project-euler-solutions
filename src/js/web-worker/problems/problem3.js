@@ -1,4 +1,4 @@
-export const problem3 = (arg = 600851475143) => {
+const problem3 = (arg = 600851475143) => {
   const primeFactors = [];
   const multiply = (accumulator, currentValue) => accumulator * currentValue;
 

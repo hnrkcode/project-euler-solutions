@@ -1,4 +1,4 @@
-export const problem4 = () => {
+const problem4 = () => {
   let palindromes = [];
 
   // Find largest palindrome made from the product of two 3-digit numbers.
