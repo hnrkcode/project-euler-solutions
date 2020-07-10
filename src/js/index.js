@@ -20,10 +20,14 @@ const calculateSolution = (solution, content, btn) => {
   if (window.Worker) {
     const calculationWorker = new Worker("./src/js/web-worker/worker.js");
     calculationWorker.postMessage(solution);
+
+    // Removed to prevent creating multiple worker threads for the same problem.
+    btn.removeEventListener("click", calculateSolution);
+    btn.remove();
+
+    // Listener waiting for worker ti finish so it can display the result and runtime.
     calculationWorker.addEventListener("message", ({ data }) => {
       content.prepend(...formatResult(data));
-      btn.removeEventListener("click", calculateSolution);
-      btn.remove();
     });
   }
 };
