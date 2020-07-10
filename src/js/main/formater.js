@@ -20,12 +20,20 @@ export const formatResult = (solutionData) => {
     addMessage("OK");
     ratingIcon.classList.add("fas", "fa-exclamation-triangle");
     ratingPara.classList.add("has-text-warning");
-  } else if (time > 5000) {
-    addMessage("BAD");
+  } else if (time > 5000 && time < 10000) {
+    addMessage("SLOW");
     ratingIcon.classList.add("fas", "fa-thumbs-down");
     ratingPara.classList.add("has-text-danger");
+  } else if (time > 10000) {
+    addMessage("VERY SLOW");
+    ratingIcon.classList.add("fas", "fa-thumbs-down");
+    ratingPara.classList.add("has-text-danger");
+  } else if (time > 50 && time < 500) {
+    addMessage("FAST");
+    ratingIcon.classList.add("fas", "fa-thumbs-up");
+    ratingPara.classList.add("has-text-success");
   } else {
-    addMessage("GOOD");
+    addMessage("VERY FAST");
     ratingIcon.classList.add("fas", "fa-thumbs-up");
     ratingPara.classList.add("has-text-success");
   }
