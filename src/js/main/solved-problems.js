@@ -5,7 +5,7 @@
 
   Example: Module "problem1.js" contains an exported function named "problem1".
 */
-const problems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const problems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 const solvedProblems = problems.map((problem) => "problem" + problem);
 
 export default {
