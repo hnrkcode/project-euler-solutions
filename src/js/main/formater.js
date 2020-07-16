@@ -1,16 +1,15 @@
+import { create } from "./elementCreater.js";
+
 // Return result and if the execution time is good, ok, or bad.
 export const formatResult = (solutionData) => {
   const [result, time] = solutionData;
 
-  const solutionPara = document.createElement("p");
-  solutionPara.textContent = `Solution: ${result}`;
-  const runtimePara = document.createElement("p");
-  runtimePara.textContent = `Runtime: ${time} ms`;
-  const ratingPara = document.createElement("p");
-  ratingPara.classList.add("has-text-weight-bold");
-  const ratingSpan = document.createElement("span");
-  ratingSpan.classList.add("icon");
-  const ratingIcon = document.createElement("i");
+  const solutionPara = create({ tag: "p", content: `Solution: ${result}` });
+  const runtimePara = create({ tag: "p", content: `Runtime: ${time} ms` });
+  const ratingPara = create({ tag: "p", classes: ["has-text-weight-bold"] });
+  const ratingSpan = create({ tag: "span", classes: ["icon"] });
+  const ratingIcon = create({ tag: "i" });
+
   ratingSpan.append(ratingIcon);
   ratingPara.append(ratingSpan);
 
