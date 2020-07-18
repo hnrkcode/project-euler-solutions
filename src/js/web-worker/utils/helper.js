@@ -12,3 +12,10 @@ const isPrime = (n) => {
 
   return true;
 };
+
+// Return factorial of a number.
+const factorial = (n) => {
+  if (n === 0) return 1;
+  else if (n === 1 || n === 2) return n;
+  else return n * factorial(n - 1);
+};
